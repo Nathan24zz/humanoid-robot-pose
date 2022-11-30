@@ -25,3 +25,9 @@ If you are using ubuntu, you can check how many file inside folder, just type in
 ```shell
 ls [name of folder] | wc -l
 ```
+
+**Fix COCO format from dataloop** <br>
+
+```shell
+python script/fix_coco_dataloop_format.py
+```
