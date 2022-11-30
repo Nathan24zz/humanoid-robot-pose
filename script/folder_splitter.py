@@ -5,11 +5,10 @@ import argparse
 import os
 import shutil
 
-N = 164  # the number of files in seach subfolder folder
 
-
-def move_files(abs_dirname):
+def move_files(abs_dirname, n):
     """Move files into subdirectories."""
+    N = n  # the number of files in seach subfolder folder
 
     files = [os.path.join(abs_dirname, f) for f in os.listdir(abs_dirname)]
 
@@ -35,6 +34,7 @@ def parse_args():
         description='Split files into multiple subfolders.')
 
     parser.add_argument('src_dir', help='source directory')
+    parser.add_argument('number_of_file', help='number of files in seach subfolder folder', type=int)
 
     return parser.parse_args()
 
@@ -43,11 +43,12 @@ def main():
     """Module's main entry point (zopectl.command)."""
     args = parse_args()
     src_dir = args.src_dir
+    n = args.number_of_file
 
     if not os.path.exists(src_dir):
         raise Exception('Directory does not exist ({0}).'.format(src_dir))
 
-    move_files(os.path.abspath(src_dir))
+    move_files(os.path.abspath(src_dir), n)
 
 
 if __name__ == '__main__':
