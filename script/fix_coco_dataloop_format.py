@@ -31,7 +31,7 @@ def fix_dataloop_format():
                     # new_categories[0]['skeleton'] = new_categories[0]['skeleton'].tolist()
 
                     # replace categories with new categories
-                    data['categories'] = new_categories[0]
+                    data['categories'] = new_categories
             except:
                 pass
         
@@ -97,6 +97,7 @@ def merge_json():
                         if data['annotations'][ann_idx]['image_id'] == current_img_id:
                             # print(data['annotations'][ann_idx]['image_id'], current_img_id)
                             data['annotations'][ann_idx]['image_id'] = image['id']
+                            data['annotations'][ann_idx]['id'] = image['id']
                             ann_idx += 1
                             # if i: print(f'{image["file_name"]} - id {image["id"]} has more than 1 annotation')
                         else:
