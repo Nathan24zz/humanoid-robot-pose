@@ -75,6 +75,7 @@ def merge_json():
     max_ann_each_image = 10
     # keep tracking current annotation index in list
     ann_idx = 0
+    count_ann = 0
 
     # loop every json files
     for file in json_files:
@@ -82,6 +83,7 @@ def merge_json():
             json_fisrt = json.load(open(f'{path_to_fix_json}{file}'))
             first_time = False
             json_fisrt['info']['description'] = 'Humanoid_robot_pose'
+            count_ann = json_fisrt['annotations'][-1]['id'] + 1
         else:
             data = json.load(open(f'{path_to_fix_json}{file}'))
             # get last image id in the first json
@@ -97,7 +99,7 @@ def merge_json():
                         if data['annotations'][ann_idx]['image_id'] == current_img_id:
                             # print(data['annotations'][ann_idx]['image_id'], current_img_id)
                             data['annotations'][ann_idx]['image_id'] = image['id']
-                            data['annotations'][ann_idx]['id'] = image['id']
+                            data['annotations'][ann_idx]['id'] = count_ann
                             ann_idx += 1
                             # if i: print(f'{image["file_name"]} - id {image["id"]} has more than 1 annotation')
                         else:
@@ -106,7 +108,8 @@ def merge_json():
                             break
                     except:
                         break
- 
+                    
+                    count_ann += 1
                 # make last_id equal to image['id'] for next iter
                 last_id = image['id']
             ann_idx = 0
