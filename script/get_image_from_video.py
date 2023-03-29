@@ -20,7 +20,7 @@ def convert(dir):
 
             sec = 0
             count = 0
-            frameRate = 0.25 #it will capture image in each 0.5 second 
+            frameRate = 1 #it will capture image in each 1 second 
             success = getFrame(sec, count, name_video, vidcap) 
             while success: 
                 sec = sec + frameRate 
